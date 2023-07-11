@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" 
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <style>
+        .btn {
+            width: 60px;
+            height: 50px;
+            margin: 5px;
+            box-shadow: 1px 1px 1px #000;
+            background-color: #2e2e2e;
+        }
+
+        .dispositivo{
+            padding: 20px;
+            margin-top: 40px;
+            border: solid 5px #48f050;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 1px 1px 5px #000;
+        }
+
+        .clear{
+            width: 200px;
+        }
+
+        .maiorMenor{
+            width: 130px;
+        }
+
+        .campoResultado{
+            text-align: right;
+            font-size: 20px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            border: solid 3px #48f050;
+            box-shadow: 1px 1px 1px #000;
+        }
+
+        .aprovado{
+            height: 110px;
+        }
+
+    </style>
+</head>
+<body style="background: #d9d9d9;">
+    <div class="container">
+        <div class=row>
+            <div class="col d-flex justify-content-center"> <!-- possibilita testar numa versao menor/ varias plataformas -->
+                <div class="dispositivo">
+                    <input type="text" id="campoResultado" class="form-control campoResultado" placeholder="0" disabled="disabled"/>
+                
+                    <div class="row">
+                        <button onclick="calcular('operacao', 'C')" ktype="button" class="btn btn-dark btn-lg clear font-weight-light" style="color: red;">C</button> 
+                        <button onclick="calcular('operacao', 'CE')" ktype="button" class="btn btn-dark btn-lg clear font-weight-light" style="color: red;">CE</button> 
+                    </div>
+
+                    <div class="row">
+                        <button onclick="calcular('operacao', 'd')" ktype="button" class="btn btn-dark btn-lg font-weight-light">d</button>
+                        <button onclick="calcular('operacao', '!')" ktype="button" class="btn btn-dark btn-lg font-weight-bold" style="color: rgb(2, 192, 2);">!</button>
+                        <button onclick="calcular('operacao', '&lt;')" ktype="button" class="btn btn-dark btn-lg maiorMenor font-weight-bold" style="color: rgb(2, 192, 2);">&lt;</button>
+                        <button onclick="calcular('operacao', '&gt;')" ktype="button" class="btn btn-dark btn-lg maiorMenor font-weight-bold" style="color: rgb(2, 192, 2);">&gt;</button>
+                    </div>
+
+                    <div class="row">
+                        <button onclick="calcular('operacao', 'Op1')" type="button" class="btn btn-dark btn-lg font-weight-light" style="color: yellow">Op1</button>
+                        <button onclick="calcular('operacao', 'Op4')" type="button" class="btn btn-dark btn-lg font-weight-light" style="color: yellow">Op4</button>  
+                        <button onclick="calcular('numero', '7')" type="button" class="btn btn-dark btn-lg font-weight-light">7</button> 
+                        <button onclick="calcular('numero', '8')" type="button" class="btn btn-dark btn-lg font-weight-light">8</button> 
+                        <button onclick="calcular('numero', '9')" type="button" class="btn btn-dark btn-lg font-weight-light">9</button> 
+                        <button onclick="calcular('operacao', 'Me')" type="button" class="btn btn-dark btn-lg font-weight-light" style="color: rgb(2, 192, 2);">Me</button> 
+                    </div>
+
+                    <div class="row">
+                        <button onclick="calcular('operacao', 'Op2')" type="button" class="btn btn-dark btn-lg font-weight-light" style="color: yellow">Op2</button>
+                        <button onclick="calcular('operacao', 'Op5')" type="button" class="btn btn-dark btn-lg font-weight-light" style="color: yellow">Op5</button> 
+                        <button onclick="calcular('numero', '4')" type="button" class="btn btn-dark btn-lg font-weight-light">4</button> 
+                        <button onclick="calcular('numero', '5')" type="button" class="btn btn-dark btn-lg font-weight-light">5</button> 
+                        <button onclick="calcular('numero', '6')" type="button" class="btn btn-dark btn-lg font-weight-light">6</button> 
+                        <button onclick="calcular('operacao', '&oplus;')" type="button" class="btn btn-dark btn-lg font-weight-light" style="color: rgb(2, 192, 2);">&oplus;</button> 
+                    </div>
+
+                    <div class="row">
+                        <button onclick="calcular('operacao', 'Op3')" type="button" class="btn btn-dark btn-lg font-weight-light" style="color: yellow">Op3</button>
+                        <button onclick="calcular('operacao', 'Op6')" type="button" class="btn btn-dark btn-lg font-weight-light" style="color: yellow">Op6</button> 
+                        <button onclick="calcular('numero', '1')" type="button" class="btn btn-dark btn-lg font-weight-light">1</button> 
+                        <button onclick="calcular('numero', '2')" type="button" class="btn btn-dark btn-lg font-weight-light">2</button> 
+                        <button onclick="calcular('numero', '3')" type="button" class="btn btn-dark btn-lg font-weight-light">3</button> 
+                        <button onclick="calcular('operacao', '&#10003;')" type="button" class="btn btn-dark btn-lg font-weight-bold aprovado" style="color: rgb(2, 192, 2);">&#10003;</button> 
+                    </div>
+
+                    <div class="row" style="margin-top: -60px;">
+                        <button onclick="calcular('operacao', 'a')" type="button" class="btn btn-dark btn-lg font-weight-light">a</button> 
+                        <button onclick="calcular('operacao', 'b')" type="button" class="btn btn-dark btn-lg font-weight-light">b</button> 
+                        <button onclick="calcular('numero', '0')" type="button" class="btn btn-dark btn-lg font-weight-light maiorMenor">0</button> 
+                        <button onclick="calcular('operacao', '.')" type="button" class="btn btn-dark btn-lg font-weight-light">.</button> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function (tipo, valor){
+            if(tipo === 'operacao'){
+                if(valor === 'c'){
+                    //limpar visor
+                    document.getElementById('resultado').value =''
+                }
+                if(valor === '+' || valor === '-' || valor === '*' || valor === '/' || valor === '.'){
+                    document.getElementById('resultado').value += valor
+                }
+                if(valor ==='='){
+                    let valor_campo = eval(document.getElementById('resultado').value) //eval -> resolve a funcao automatico. Trata a conta interia como uma só variavel
+                    document.getElementById('resultado').value = valor_campo
+                }
+            }else if(tipo === 'numero'){
+                document.getElementById('resultado').value += valor //sempre q digitar um valor, sera concatenado no visor
+            }
+        }
+    </script>
+
+</body>
+</html>
