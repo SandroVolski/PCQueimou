@@ -1,0 +1,49 @@
+Insonia
+engrenagem na esquerda, nova pasta auth e dentro um arquivo POST Auth tambem, em Body um JSON, e pega o ultimo cadastrado para pegar o email dele, porém tem que auterar a barra para auth e não usuarios
+deu o erro 401 pq a senha nao esta criptografada
+
+//outra coisa
+
+cadastra outra pessoa com a senha normal, porem sera incriptografada, no auth aparecerá o token e criptografado
+no obtertodos nao pode dar autorizado, para isso precisa:
+headers cabecalho do obter Todos e vai la em baixo no Book Edit
+e digita no codigo:
+Content-Type: application/json
+//Digita Authentication: Res e seleciona o body, clica encima do vermelho, 
+//Response
+//Body Atribute
+//[Auth] POST Auth
+//$.token
+//Always - resend request when
+Authentication: Response 'body'...
+
+Da um Ctrl C e coloca em todos os arquivos da pasta Usuario: obter pro id, atualizar, deletar, unico que nao precisa é o cadastrar
+
+
+
+
+
+
+
+Codigo (VSCode)
+
+UsuarioService.java
+
+private ModelMapper mapper; //aqui ja tem
+@Autowired
+private BCryptPasswordEncoder passwordEncoder;
+
+//...UsuarioResponseDTO cadastrar
+usuariio.setDataCadastro(new Date()); // aquio ja tem
+//encriptografar senha
+String sen ha = passwordEncoder.encode(usuario.getSenha());
+usuario.setSenha(senha);
+usuario.setId(id:null);
+usuario = usuarioRepository.save(usuario); //aqui ja tem
+
+//...UsuarioResponseDTO atualizar
+Usuario usuario = mapper.map(dto, destinationType:Usuario.class); //ja tem
+usuario.setSenha(dto.getSenha());
+usuario.setId(id);
+usuario.setDataCadastro(usuarioBanco.getDataCadastro());
+usuario.setDataInativacao(usuarioBanco.getDataInativacao());
